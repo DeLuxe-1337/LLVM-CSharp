@@ -37,8 +37,9 @@ IntPtr output;
 LLVMWriteBitcodeToFile(module, "MyModule.o");
 LLVMPrintModuleToFile(module, "MyModule.ll", out output);
 
-LLVMDisposeModule(module);
-
 sw.Stop();
 
 Console.WriteLine($"It took {sw.ElapsedMilliseconds} to build EVERYTHING.");
+
+LLVMDumpModule(module);
+LLVMDisposeModule(module);
