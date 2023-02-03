@@ -63,12 +63,23 @@ namespace LLVM
         public static extern BasicBlockRef LLVMAppendBasicBlockInContext(ContextRef context, ValueRef function, string name);
         public enum LLVMVerifierFailureAction
         {
-            LLVMReturnStatusAction,
-            LLVMPrintMessageAction,
-            LLVMPrintMessageActionAndAbort
+            ReturnStatusAction,
+            PrintMessageAction,
+            PrintMessageActionAndAbort
         }
         [DllImport("LLVM-C.dll")]
         public static extern int LLVMVerifyModule(ModuleRef module, LLVMVerifierFailureAction Action, out IntPtr OutMessage);
+        public enum LLVMLinkage
+        {
+            LLVMExternalLinkage, LLVMAvailableExternallyLinkage, LLVMLinkOnceAnyLinkage, LLVMLinkOnceODRLinkage,
+            LLVMLinkOnceODRAutoHideLinkage, LLVMWeakAnyLinkage, LLVMWeakODRLinkage, LLVMAppendingLinkage,
+            LLVMInternalLinkage, LLVMPrivateLinkage, LLVMDLLImportLinkage, LLVMDLLExportLinkage,
+            LLVMExternalWeakLinkage, LLVMGhostLinkage, LLVMCommonLinkage, LLVMLinkerPrivateLinkage,
+            LLVMLinkerPrivateWeakLinkage
+        }
+
+        [DllImport("LLVM-C.dll")]
+        public static extern void LLVMSetLinkage(ValueRef function, LLVMLinkage kind);
         [DllImport("LLVM-C.dll")]
         public static extern ValueRef LLVMBuildPointerCast(BuilderRef builder, ValueRef value, TypeRef destty, string name);
         [DllImport("LLVM-C.dll")]
@@ -79,6 +90,10 @@ namespace LLVM
         public static extern ValueRef LLVMGetNamedFunction(ModuleRef module, string name);
         [DllImport("LLVM-C.dll")]
         public static extern ValueRef LLVMBuildCall2(BuilderRef builder, TypeRef ty, ValueRef function, ValueRef[] args, uint argnum, string name);
+        [DllImport("LLVM-C.dll")]
+        public static extern IntPtr LLVMGetVersion();
+        [DllImport("LLVM-C.dll")]
+        public static extern void LLVMSetDataLayout(ModuleRef module, string triple);
         // Other LLVM-C function declarations...
     }
 
