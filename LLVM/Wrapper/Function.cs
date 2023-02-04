@@ -14,7 +14,7 @@ namespace LLVM.Wrapper
         public TypeRef sig;
         private ModuleRef module;
         public ValueRef func;
-        public Function(ModuleRef module, string name, TypeRef sig)
+        public Function(ModuleRef module, TypeRef sig, string name)
         {
             this.module = module;
             this.name = name;

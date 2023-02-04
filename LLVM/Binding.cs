@@ -106,17 +106,10 @@ namespace LLVM
 
         [DllImport("LLVM-C.dll")]
         public static extern ValueRef LLVMBuildLoad2(BuilderRef builder, TypeRef ty, ValueRef pointerval, string name);
-        //[DllImport("LLVM-C.dll")]
-        //public static extern ValueRef LLVMGetFunction(ModuleRef module, string name);
         [DllImport("LLVM-C.dll")]
         public static extern TypeRef LLVMTypeOf(ValueRef value);
         [DllImport("LLVM-C.dll")]
         public static extern TypeRef LLVMGetReturnType(ValueRef function);
-        [DllImport("LLVM-C.dll")]
-        public static extern TypeRef LLVMGetFunctionType(ValueRef function);
-
-        [DllImport("LLVM-C.dll")]
-        public static extern void LLVMWriteObjectToFile(ModuleRef module, string path);
     }
 
 }
