@@ -24,7 +24,13 @@ namespace LLVM.Wrapper
 
             functions.Add(name, this);
         }
+        public Function(ValueRef function, TypeRef sig, string name)
+        {
+            this.func = function;
+            this.sig = sig;
 
+            functions.Add(name, this);
+        }
         public ValueRef GetParameter(int param)
         {
             return LLVMGetParam(func, (uint)param);
