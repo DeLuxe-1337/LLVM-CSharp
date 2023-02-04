@@ -89,7 +89,7 @@ namespace LLVM
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetNamedFunction")]
         public static extern ValueRef GetNamedFunction(ModuleRef module, string name);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildCall2")]
-        public static extern ValueRef BuildCall2(BuilderRef builder, TypeRef ty, ValueRef function, ValueRef[] args, uint argnum, string name);
+        public static extern ValueRef BuildCall2(BuilderRef builder, TypeRef ty, ValueRef function, ValueRef[] args, uint argnum, string name = "");
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetVersion")]
         public static extern IntPtr GetVersion();
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMSetDataLayout")]
