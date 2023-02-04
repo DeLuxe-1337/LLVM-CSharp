@@ -96,6 +96,8 @@ namespace LLVM
         public static extern void LLVMSetDataLayout(ModuleRef module, string triple);
         [DllImport("LLVM-C.dll")]
         public static extern void LLVMDumpModule(ModuleRef M);
+        [DllImport("LLVM-C.dll")]
+        public static extern ValueRef LLVMGetParam(ValueRef function, uint parameter);
         // Other LLVM-C function declarations...
     }
 

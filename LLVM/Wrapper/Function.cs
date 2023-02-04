@@ -9,7 +9,7 @@ namespace LLVM.Wrapper
 {
     public class Function : WrapBase
     {
-        private string name;
+        public string name;
         public TypeRef sig;
         private ModuleRef module;
         public ValueRef func;
@@ -20,6 +20,11 @@ namespace LLVM.Wrapper
             this.sig = sig;
 
             func = LLVMAddFunction(module, name, sig);
+        }
+
+        public ValueRef GetParameter(int param)
+        {
+            return LLVMGetParam(func, (uint)param);
         }
     }
 }
