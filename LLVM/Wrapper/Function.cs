@@ -9,6 +9,7 @@ namespace LLVM.Wrapper
 {
     public class Function : WrapBase
     {
+        public static Dictionary<string, Function> functions = new();
         public string name;
         public TypeRef sig;
         private ModuleRef module;
@@ -20,6 +21,8 @@ namespace LLVM.Wrapper
             this.sig = sig;
 
             func = LLVMAddFunction(module, name, sig);
+
+            functions.Add(name, this);
         }
 
         public ValueRef GetParameter(int param)

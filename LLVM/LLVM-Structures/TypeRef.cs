@@ -11,7 +11,7 @@ namespace LLVM
     public struct TypeRef : IEquatable<TypeRef>
     {
         [FieldOffset(0)]
-        private readonly IntPtr handle;
+        public readonly IntPtr handle;
 
         public TypeRef(IntPtr handle)
         {
