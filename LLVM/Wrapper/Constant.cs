@@ -13,7 +13,7 @@ namespace LLVM.Wrapper
     {
         public static ValueRef String(BuilderRef builder, string str)
         {
-            return LLVMBuildPointerCast(builder, LLVMBuildGlobalString(builder, str, "String"), LLVMPointerType(LLVMInt8Type(), 0), "0");
+            return BuildPointerCast(builder, BuildGlobalString(builder, str, "String"), PointerType(Int8Type(), 0), "0");
         }
     }
 }

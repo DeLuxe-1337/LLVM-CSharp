@@ -12,7 +12,7 @@ namespace LLVM.Wrapper
     {
         public static ValueRef Func(BuilderRef builder, Function func, ValueRef[] args)
         {
-            return LLVMBuildCall2(builder, func.sig, func.func, args, (uint)args.Length, "call");
+            return BuildCall2(builder, func.sig, func.func, args, (uint)args.Length, "call");
         }
     }
 }

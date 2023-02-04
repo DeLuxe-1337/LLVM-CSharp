@@ -20,7 +20,7 @@ namespace LLVM.Wrapper
             this.name = name;
             this.sig = sig;
 
-            func = LLVMAddFunction(module, name, sig);
+            func = AddFunction(module, name, sig);
 
             functions.Add(name, this);
         }
@@ -33,7 +33,7 @@ namespace LLVM.Wrapper
         }
         public ValueRef GetParameter(int param)
         {
-            return LLVMGetParam(func, (uint)param);
+            return GetParam(func, (uint)param);
         }
     }
 }
