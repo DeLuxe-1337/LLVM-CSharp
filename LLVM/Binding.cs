@@ -98,7 +98,14 @@ namespace LLVM
         public static extern void LLVMDumpModule(ModuleRef M);
         [DllImport("LLVM-C.dll")]
         public static extern ValueRef LLVMGetParam(ValueRef function, uint parameter);
-        // Other LLVM-C function declarations...
+        [DllImport("LLVM-C.dll")]
+        public static extern ValueRef LLVMBuildAlloca(BuilderRef builder, TypeRef allocType, string name);
+
+        [DllImport("LLVM-C.dll")]
+        public static extern ValueRef LLVMBuildStore(BuilderRef builder, ValueRef target, ValueRef ptr);
+
+        [DllImport("LLVM-C.dll")]
+        public static extern ValueRef LLVMBuildLoad2(BuilderRef builder, ValueRef ty, ValueRef pointerval, string name);
     }
 
 }
