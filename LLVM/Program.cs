@@ -7,41 +7,41 @@ using static LLVM.Binding;
 Stopwatch sw = new();
 sw.Start();
 
-var context = LLVMContextCreate();
-var module = LLVMModuleCreateWithNameInContext("MyModule", context);
-LLVMSetDataLayout(module, "e-m:e-p:32:32-i64:64-n32:64-S128");
+var context = ContextCreate();
+var module = ModuleCreateWithNameInContext("MyModule", context);
+SetDataLayout(module, "e-m:e-p:32:32-i64:64-n32:64-S128");
 
-var builder = LLVMCreateBuilderInContext(context);
+var builder = CreateBuilderInContext(context);
 
-//LLVMSetTarget(module, "wasm32-unknown-unknown");
+//SetTarget(module, "wasm32-unknown-unknown");
 
-var voidType = LLVMVoidType();
-var i8 = LLVMInt8Type();
-var strType = LLVMPointerType(i8, 0);
+var voidType = VoidType();
+var i8 = Int8Type();
+var strType = PointerType(i8, 0);
 
-var printf = new Function(module, "printf", LLVMFunctionType(LLVMInt32Type(), new TypeRef[] { strType }, 1, 1));
-var mainFunc = new Function(module, "main", LLVMFunctionType(voidType, null, 0));
+var printf = new Function(module, "printf", FunctionType(Int32Type(), new TypeRef[] { strType }, 1, 1));
+var mainFunc = new Function(module, "main", FunctionType(voidType, null, 0));
 
-LLVMSetLinkage(mainFunc.func, LLVMLinkage.LLVMExternalLinkage);
+SetLinkage(mainFunc.func, Linkage.ExternalLinkage);
 
-var block = LLVMAppendBasicBlockInContext(context, mainFunc.func, "onInvoke");
-LLVMPositionBuilderAtEnd(builder, block);
+var block = AppendBasicBlockInContext(context, mainFunc.func, "onInvoke");
+PositionBuilderAtEnd(builder, block);
 
 Call.Func(builder, printf, new ValueRef[] { Constant.String(builder, "Hello, world") });
 
 Call.Func(builder, printf, new ValueRef[]{ Constant.String(builder, "%s"), Constant.String(builder, "Hello, world") });
 
-LLVMBuildRetVoid(builder);
+BuildRetVoid(builder);
 
 Console.WriteLine($"It took {sw.ElapsedMilliseconds} to build module.");
 
 IntPtr output;
-LLVMWriteBitcodeToFile(module, "MyModule.o");
-LLVMPrintModuleToFile(module, "MyModule.ll", out output);
+WriteBitcodeToFile(module, "MyModule.o");
+PrintModuleToFile(module, "MyModule.ll", out output);
 
 sw.Stop();
 
 Console.WriteLine($"It took {sw.ElapsedMilliseconds} to build EVERYTHING.");
 
-LLVMDumpModule(module);
-LLVMDisposeModule(module);
+DumpModule(module);
+DisposeModule(module);
