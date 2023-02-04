@@ -108,7 +108,9 @@ namespace LLVM
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMTypeOf")]
         public static extern TypeRef TypeOf(ValueRef value);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetReturnType")]
-        public static extern TypeRef GetReturnType(ValueRef function);
+        public static extern TypeRef GetReturnType(TypeRef function);
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMCountParams")]
+        public static extern uint CountParams(TypeRef function);
 
     }
 
