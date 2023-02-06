@@ -122,6 +122,8 @@ namespace LLVM
 
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildMul")]
         public static extern ValueRef BuildMul(BuilderRef builder, ValueRef lhs, ValueRef rhs, string name = "");
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMConstInt")]
+        public static extern ValueRef ConstInt(TypeRef intType, ulong value, bool signExtend = true);
     }
 
 }
