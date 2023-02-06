@@ -99,19 +99,29 @@ namespace LLVM
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetParam")]
         public static extern ValueRef GetParam(ValueRef function, uint parameter);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildAlloca")]
-        public static extern ValueRef BuildAlloca(BuilderRef builder, TypeRef allocType, string name);
+        public static extern ValueRef BuildAlloca(BuilderRef builder, TypeRef allocType, string name = "");
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildStore")]
         public static extern ValueRef BuildStore(BuilderRef builder, ValueRef target, ValueRef ptr);
 
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildLoad2")]
-        public static extern ValueRef BuildLoad2(BuilderRef builder, TypeRef ty, ValueRef pointerval, string name);
+        public static extern ValueRef BuildLoad2(BuilderRef builder, TypeRef ty, ValueRef pointerval, string name = "");
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMTypeOf")]
         public static extern TypeRef TypeOf(ValueRef value);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetReturnType")]
         public static extern TypeRef GetReturnType(TypeRef function);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMCountParams")]
         public static extern uint CountParams(TypeRef function);
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildAdd")]
+        public static extern ValueRef BuildAdd(BuilderRef builder, ValueRef lhs, ValueRef rhs, string name = "");
 
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildSub")]
+        public static extern ValueRef BuildSub(BuilderRef builder, ValueRef lhs, ValueRef rhs, string name = "");
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildSDiv")]
+        public static extern ValueRef BuildSDiv(BuilderRef builder, ValueRef lhs, ValueRef rhs, string name = "");
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildMul")]
+        public static extern ValueRef BuildMul(BuilderRef builder, ValueRef lhs, ValueRef rhs, string name = "");
     }
 
 }
