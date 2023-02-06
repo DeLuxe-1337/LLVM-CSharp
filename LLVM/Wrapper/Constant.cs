@@ -15,5 +15,9 @@ namespace LLVM.Wrapper
         {
             return BuildPointerCast(builder, BuildGlobalString(builder, str, "String"), PointerType(Int8Type(), 0), "0");
         }
+        public static ValueRef Int32(BuilderRef builder, int val)
+        {
+            return ConstInt(Int32Type(), (ulong)val);
+        }
     }
 }
