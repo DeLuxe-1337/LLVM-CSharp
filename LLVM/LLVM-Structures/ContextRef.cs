@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LLVM.LLVM_Structures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -31,6 +32,16 @@ namespace LLVM
         public override int GetHashCode()
         {
             return handle.GetHashCode();
+        }
+
+        public static bool operator ==(ContextRef left, ContextRef right)
+        {
+            return left.handle.Equals(right.handle);
+        }
+
+        public static bool operator !=(ContextRef left, ContextRef right)
+        {
+            return !(left.handle == right.handle);
         }
     }
 }

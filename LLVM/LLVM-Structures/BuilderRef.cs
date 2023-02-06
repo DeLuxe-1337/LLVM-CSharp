@@ -32,5 +32,15 @@ namespace LLVM.LLVM_Structures
         {
             return handle.GetHashCode();
         }
+
+        public static bool operator ==(BuilderRef left, BuilderRef right)
+        {
+            return left.handle.Equals(right.handle);
+        }
+
+        public static bool operator !=(BuilderRef left, BuilderRef right)
+        {
+            return !(left.handle == right.handle);
+        }
     }
 }

@@ -32,5 +32,15 @@ namespace LLVM
         {
             return handle.GetHashCode();
         }
+
+        public static bool operator ==(BasicBlockRef left, BasicBlockRef right)
+        {
+            return left.handle.Equals(right.handle);
+        }
+
+        public static bool operator !=(BasicBlockRef left, BasicBlockRef right)
+        {
+            return !(left.handle == right.handle);
+        }
     }
 }
