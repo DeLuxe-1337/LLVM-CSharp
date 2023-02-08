@@ -128,6 +128,8 @@ namespace LLVM
         public static extern ValueRef ConstNull(TypeRef typRef);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMShutdown")]
         public static extern void Dispose();
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMIsNull")]
+        public static extern BoolRef IsNull(ValueRef val);
     }
 
 }
