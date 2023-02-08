@@ -8,14 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Program.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Program.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="LLVM-C.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
