@@ -130,6 +130,8 @@ namespace LLVM
         public static extern void Dispose();
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMIsNull")]
         public static extern BoolRef IsNull(ValueRef val);
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMLinkModules2")]
+        public static extern BoolRef LinkModules(ModuleRef dest, ModuleRef source);
     }
 
 }
