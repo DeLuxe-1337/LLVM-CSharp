@@ -132,7 +132,7 @@ namespace LLVM
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMDisposeExecutionEngine")]
         public static extern void DisposeExecutionEngine(ExecutionEngineRef e);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMRunFunction")]
-        public static extern int RunFunction(ExecutionEngineRef e, ValueRef func, uint numargs, GenericValueRef args);
+        public static extern int RunFunction(ExecutionEngineRef e, ValueRef func, uint numargs, GenericValueRef[] args);
     }
 
 }
