@@ -5,6 +5,91 @@ namespace LLVM
 {
     public static class Binding
     {
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBasicBlockAsValue")]
+        public static extern ValueRef BasicBlockAsValue(BasicBlockRef BB);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMValueIsBasicBlock")]
+        public static extern bool ValueIsBasicBlock(ValueRef Val);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMValueAsBasicBlock")]
+        public static extern BasicBlockRef ValueAsBasicBlock(ValueRef Val);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetBasicBlockName")]
+        public static extern string GetBasicBlockName(BasicBlockRef BB);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetBasicBlockParent")]
+        public static extern ValueRef GetBasicBlockParent(BasicBlockRef BB);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetBasicBlockTerminator")]
+        public static extern ValueRef GetBasicBlockTerminator(BasicBlockRef BB);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMCountBasicBlocks")]
+        public static extern uint CountBasicBlocks(ValueRef Fn);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetBasicBlocks")]
+        public static extern void GetBasicBlocks(ValueRef Fn, out BasicBlockRef[] BasicBlocks);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetFirstBasicBlock")]
+        public static extern BasicBlockRef GetFirstBasicBlock(ValueRef Fn);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetLastBasicBlock")]
+        public static extern BasicBlockRef GetLastBasicBlock(ValueRef Fn);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetNextBasicBlock")]
+        public static extern BasicBlockRef GetNextBasicBlock(BasicBlockRef BB);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetPreviousBasicBlock")]
+        public static extern BasicBlockRef GetPreviousBasicBlock(BasicBlockRef BB);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetEntryBasicBlock")]
+        public static extern BasicBlockRef GetEntryBasicBlock(ValueRef Fn);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMInsertExistingBasicBlockAfterInsertBlock")]
+        public static extern void InsertExistingBasicBlockAfterInsertBlock(BuilderRef Builder, BasicBlockRef BB);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMAppendExistingBasicBlock")]
+        public static extern void AppendExistingBasicBlock(ValueRef Fn, BasicBlockRef BB);
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildAggregateRet")]
+        public static extern ValueRef BuildAggregateRet(BuilderRef b, ValueRef[] RetVals, uint N);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildBr")]
+        public static extern ValueRef BuildBr(BuilderRef b, BasicBlockRef Dest);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildCondBr")]
+        public static extern ValueRef BuildCondBr(BuilderRef b, ValueRef If, BasicBlockRef Then, BasicBlockRef Else);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildSwitch")]
+        public static extern ValueRef BuildSwitch(BuilderRef b, ValueRef V, BasicBlockRef Else, uint NumCases);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildIndirectBr")]
+        public static extern ValueRef BuildIndirectBr(BuilderRef B, ValueRef Addr, uint NumDests);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildInvoke2")]
+        public static extern ValueRef BuildInvoke2(BuilderRef b, TypeRef Ty, ValueRef Fn, ValueRef[] Args, uint NumArgs, BasicBlockRef Then, BasicBlockRef Catch, string Name);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildUnreachable")]
+        public static extern ValueRef BuildUnreachable(BuilderRef b);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildResume")]
+        public static extern ValueRef BuildResume(BuilderRef B, ValueRef Exn);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildLandingPad")]
+        public static extern ValueRef BuildLandingPad(BuilderRef B, TypeRef Ty, ValueRef PersFn, uint NumClauses, string Name);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildCleanupRet")]
+        public static extern ValueRef BuildCleanupRet(BuilderRef B, ValueRef CatchPad, BasicBlockRef BB);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildCatchRet")]
+        public static extern ValueRef BuildCatchRet(BuilderRef B, ValueRef CatchPad, BasicBlockRef BB);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildCatchPad")]
+        public static extern ValueRef BuildCatchPad(BuilderRef B, ValueRef ParentPad, ValueRef[] Args, uint NumArgs, string Name);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildCleanupPad")]
+        public static extern ValueRef BuildCleanupPad(BuilderRef B, ValueRef ParentPad, ValueRef[] Args, uint NumArgs, string Name);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildCatchSwitch")]
+        public static extern ValueRef BuildCatchSwitch(BuilderRef B, ValueRef ParentPad, BasicBlockRef UnwindBB, uint NumHandlers, string Name);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMDisposeModule")]
         public static extern void DisposeModule(ModuleRef module);
 
@@ -22,6 +107,10 @@ namespace LLVM
 
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMPositionBuilderAtEnd")]
         public static extern void PositionBuilderAtEnd(BuilderRef Builder, BasicBlockRef Block);
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMPositionBuilder")]
+        public static extern void PositionBuilder(BuilderRef Builder, BasicBlockRef Block, ValueRef instr);
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMPositionBuilderBefore")]
+        public static extern void PositionBuilderBefore(BuilderRef Builder, ValueRef instr);
 
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMAddFunction")]
         public static extern ValueRef AddFunction(ModuleRef M, string Name, TypeRef FunctionTy);
@@ -133,6 +222,17 @@ namespace LLVM
         public static extern void DisposeExecutionEngine(ExecutionEngineRef e);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMRunFunction")]
         public static extern int RunFunction(ExecutionEngineRef e, ValueRef func, uint numargs, GenericValueRef[] args);
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetInsertBlock")]
+        public static extern BasicBlockRef GetInsertBlock(BuilderRef Builder);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMClearInsertionPosition")]
+        public static extern void ClearInsertionPosition(BuilderRef Builder);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMInsertIntoBuilder")]
+        public static extern void InsertIntoBuilder(BuilderRef Builder, ValueRef instr);
+
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMInsertIntoBuilderWithName")]
+        public static extern void InsertIntoBuilderWithName(BuilderRef Builder, ValueRef instr, string Name);
     }
 
 }
