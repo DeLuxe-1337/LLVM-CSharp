@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using static LLVM.Binding;
 
 namespace LLVM
 {
@@ -16,6 +17,11 @@ namespace LLVM
         public ModuleRef(IntPtr handle)
         {
             this.handle = handle;
+        }
+
+        public void Link(ModuleRef module)
+        {
+            LinkModules(this, module);
         }
 
         public bool Equals(ModuleRef other)
