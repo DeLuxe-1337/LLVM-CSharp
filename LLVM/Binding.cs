@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LLVM.LLVM_Structures;
 using System.Runtime.InteropServices;
-using LLVM.LLVM_Structures;
 
 namespace LLVM
 {
-    public class Binding
+    public static class Binding
     {
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMDisposeModule")]
         public static extern void DisposeModule(ModuleRef module);

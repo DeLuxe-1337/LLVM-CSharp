@@ -1,15 +1,9 @@
-﻿using LLVM.LLVM_Structures;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
 namespace LLVM
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct ContextRef : IEquatable<ContextRef>
+    public readonly struct ContextRef : IEquatable<ContextRef>
     {
         [FieldOffset(0)]
         private readonly IntPtr handle;

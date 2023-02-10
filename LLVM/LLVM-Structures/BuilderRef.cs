@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
 namespace LLVM.LLVM_Structures
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct BuilderRef : IEquatable<BuilderRef>
+    public readonly struct BuilderRef : IEquatable<BuilderRef>
     {
         [FieldOffset(0)]
         private readonly IntPtr handle;

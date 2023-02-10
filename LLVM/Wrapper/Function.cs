@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using static LLVM.Binding;
-using System.Threading.Tasks;
+﻿using static LLVM.Binding;
 
 namespace LLVM.Wrapper
 {
@@ -12,7 +7,7 @@ namespace LLVM.Wrapper
         public static Dictionary<string, Function> functions = new();
         public string name;
         public TypeRef sig;
-        private ModuleRef module;
+        private readonly ModuleRef module;
         public ValueRef func;
         public Function(ModuleRef module, TypeRef sig, string name)
         {
@@ -26,7 +21,7 @@ namespace LLVM.Wrapper
         }
         public Function(ValueRef function, TypeRef sig, string name)
         {
-            this.func = function;
+            func = function;
             this.sig = sig;
 
             functions.Add(name, this);

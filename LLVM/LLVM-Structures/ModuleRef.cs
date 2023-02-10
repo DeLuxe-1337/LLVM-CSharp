@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 using static LLVM.Binding;
 
 namespace LLVM
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct ModuleRef : IEquatable<ModuleRef>
+    public readonly struct ModuleRef : IEquatable<ModuleRef>
     {
         [FieldOffset(0)]
         private readonly IntPtr handle;
@@ -21,7 +16,7 @@ namespace LLVM
 
         public void Link(ModuleRef module)
         {
-            LinkModules(this, module);
+            _ = LinkModules(this, module);
         }
 
         public bool Equals(ModuleRef other)

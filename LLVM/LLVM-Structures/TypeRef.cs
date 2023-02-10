@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
 namespace LLVM
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct TypeRef : IEquatable<TypeRef>
+    public readonly struct TypeRef : IEquatable<TypeRef>
     {
         [FieldOffset(0)]
         public readonly IntPtr handle;
