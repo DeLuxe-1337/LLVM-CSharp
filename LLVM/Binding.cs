@@ -127,6 +127,12 @@ namespace LLVM
         public static extern BoolRef IsNull(ValueRef val);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMLinkModules2")]
         public static extern BoolRef LinkModules(ModuleRef dest, ModuleRef source);
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMCreateExecutionEngineForModule")]
+        public static extern BoolRef CreateExecutionEngineForModule(out ExecutionEngineRef outee, ModuleRef m, out string error);
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMDisposeExecutionEngine")]
+        public static extern void DisposeExecutionEngine(ExecutionEngineRef e);
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMRunFunction")]
+        public static extern int RunFunction(ExecutionEngineRef e, ValueRef func, uint numargs, GenericValueRef args);
     }
 
 }
