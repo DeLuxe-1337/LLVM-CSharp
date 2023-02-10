@@ -29,7 +29,7 @@ namespace LLVM.Wrapper
             func = function;
             this.sig = sig;
 
-            functions.Add(name, this);
+            functions[name] = this;
         }
         public ValueRef GetParameter(int param)
         {
