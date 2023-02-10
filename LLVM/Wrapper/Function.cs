@@ -9,6 +9,11 @@ namespace LLVM.Wrapper
         public TypeRef sig;
         private readonly ModuleRef module;
         public ValueRef func;
+        public static void FixFunctionReferences(ModuleRef module)
+        {
+            foreach(var f in functions)
+                functions[f.Key].func = GetNamedFunction(module, f.Key);
+        } 
         public Function(ModuleRef module, TypeRef sig, string name)
         {
             this.module = module;
@@ -17,7 +22,7 @@ namespace LLVM.Wrapper
 
             func = AddFunction(module, name, sig);
 
-            functions.Add(name, this);
+            functions[name] = this;
         }
         public Function(ValueRef function, TypeRef sig, string name)
         {
