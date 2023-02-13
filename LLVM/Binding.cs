@@ -190,8 +190,6 @@ namespace LLVM
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildLoad2")]
         public static extern ValueRef BuildLoad2(BuilderRef builder, TypeRef ty, ValueRef pointerval, string name = "");
 
-        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildLoad")]
-        public static extern ValueRef BuildLoad(BuilderRef builder, ValueRef pointerval, string name = "");
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMTypeOf")]
         public static extern TypeRef TypeOf(ValueRef value);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetReturnType")]
