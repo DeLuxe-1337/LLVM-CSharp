@@ -235,6 +235,10 @@ namespace LLVM
         public static extern void InsertIntoBuilderWithName(BuilderRef Builder, ValueRef instr, string Name);
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildPointerCast")]
         public static extern ValueRef BuildPointerCast(BuilderRef Builder, ValueRef val, TypeRef DestTy, BoolRef signed, string name = "");
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMInt1Type")]
+        public static extern TypeRef Int1Type();
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildAnd")]
+        public static extern ValueRef BuildAnd(BuilderRef builder, ValueRef left, ValueRef right, string name = "");
     }
 
 }

@@ -13,5 +13,9 @@ namespace LLVM.Wrapper
         {
             return ConstInt(Int32Type(), (ulong)val);
         }
+        public static ValueRef Bool(BuilderRef builder, bool val)
+        {
+            return ConstInt(Int1Type(), (ulong)(val ? 1 : 0));
+        }
     }
 }
