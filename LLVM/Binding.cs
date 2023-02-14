@@ -240,6 +240,10 @@ namespace LLVM
         public static extern TypeRef Int1Type();
         [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildAnd")]
         public static extern ValueRef BuildAnd(BuilderRef builder, ValueRef left, ValueRef right, string name = "");
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetValueName2", ExactSpelling = true)]
+        public static extern string GetValueName(ValueRef va);
+        [DllImport("LLVM-C.dll", EntryPoint = "LLVMPrintValueToString", ExactSpelling = true)]
+        public static extern string PrintValueToString(ValueRef va);
     }
 
 }

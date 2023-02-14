@@ -1,4 +1,6 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
+using static LLVM.Binding;
 
 namespace LLVM
 {
@@ -12,7 +14,11 @@ namespace LLVM
         {
             this.handle = handle;
         }
-
+        public string GetName()
+        {
+            //For some reason GetValueName wasn't working. came up with this alternative.
+            return Regex.Match(PrintValueToString(this), "(?<=@)[\\w\\.]+").Value;
+        }
         public bool Equals(ValueRef other)
         {
             return handle == other.handle;

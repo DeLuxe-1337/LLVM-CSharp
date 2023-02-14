@@ -5,10 +5,17 @@ namespace LLVM.Wrapper
 {
     public class Constant : WrapBase
     {
+        private static Dictionary<string, ValueRef> StringPool = new();
         public static ValueRef String(BuilderRef builder, string str)
         {
-            return BuildPointerCast(builder, BuildGlobalString(builder, str, "String"), PointerType(Int8Type(), 0), "0");
+            if (!StringPool.TryGetValue(str, out ValueRef cachedString))
+            {
+                cachedString = BuildPointerCast(builder, BuildGlobalString(builder, str, "String"), PointerType(Int8Type(), 0), "0");
+                StringPool[str] = cachedString;
+            }
+            return cachedString;
         }
+
         public static ValueRef Int32(BuilderRef builder, int val)
         {
             return ConstInt(Int32Type(), (ulong)val);
