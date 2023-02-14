@@ -11,9 +11,11 @@ namespace LLVM.Wrapper
         public ValueRef func;
         public static void FixFunctionReferences(ModuleRef module)
         {
-            foreach(var f in functions)
+            foreach (KeyValuePair<string, Function> f in functions)
+            {
                 functions[f.Key].func = GetNamedFunction(module, f.Key);
-        } 
+            }
+        }
         public Function(ModuleRef module, TypeRef sig, string name)
         {
             this.module = module;

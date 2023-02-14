@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using static LLVM.Binding;
 
 namespace LLVM
 {
