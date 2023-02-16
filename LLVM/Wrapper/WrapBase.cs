@@ -1,7 +1,5 @@
-﻿namespace LLVM.Wrapper
-{
-    public interface WrapBase
-    {
+﻿namespace LLVM.Wrapper;
 
-    }
+public interface WrapBase
+{
 }

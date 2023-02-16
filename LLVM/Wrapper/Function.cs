@@ -1,69 +1,77 @@
 ﻿using System.Text.RegularExpressions;
 using static LLVM.Binding;
 
-namespace LLVM.Wrapper
+namespace LLVM.Wrapper;
+
+public class Function : WrapBase
 {
-    public class Function : WrapBase
+    public static List<Function> functions = new();
+    private readonly ModuleRef module;
+    public TypeRef[] args;
+    public ValueRef func;
+    public string name;
+    public string realName;
+    public TypeRef sig;
+    public bool vararg;
+
+    public Function(ModuleRef module, TypeRef[] args, TypeRef sig, string name)
     {
-        public static List<Function> functions = new();
-        public string name;
-        public string realName;
-        public TypeRef sig;
-        public TypeRef[] args;
-        private readonly ModuleRef module;
-        public ValueRef func;
-        public bool vararg = false;
-        public static void FixFunctionReferences(ModuleRef module)
-        {
-            foreach (var f in functions)
-            {
-                functions[functions.IndexOf(f)].func = GetNamedFunction(module, f.realName);
-            }
-        }
-        public static Function GetFromNameAndArg(string name, TypeRef[] args)
-        {
-            foreach (var f in functions)
-            {
-                if (f.name == name && (f.args.SequenceEqual(args) || f.vararg))
-                    return f;
-            }
+        this.module = module;
+        this.name = name;
+        this.sig = sig;
+        this.args = args;
 
-            return null;
-        }
-        public string GetName()
-        {
-            //For some reason GetValueName wasn't working. came up with this alternative.
-            return Regex.Match(PrintValueToString(func), "(?<=@)[\\w\\.]+").Value;
-        }
+        func = AddFunction(module, name, sig);
 
-        public Function(ModuleRef module, TypeRef[] args, TypeRef sig, string name)
-        {
-            this.module = module;
-            this.name = name;
-            this.sig = sig;
-            this.args = args;
+        realName = GetName();
 
-            func = AddFunction(module, name, sig);
+        functions.Add(this);
+    }
 
-            this.realName = this.GetName();
+    public Function(ValueRef function, TypeRef[] args, TypeRef sig, string name)
+    {
+        func = function;
+        this.sig = sig;
+        this.args = args;
 
-            functions.Add(this);
-        }
-        public Function(ValueRef function, TypeRef[] args, TypeRef sig, string name)
-        {
-            func = function;
-            this.sig = sig;
-            this.args = args;
+        this.name = GetName();
+        realName = this.name;
+        vararg = true;
 
-            this.name = this.GetName();
-            this.realName = this.name;
-            this.vararg = true;
+        functions.Add(this);
+    }
 
-            functions.Add(this);
-        }
-        public ValueRef GetParameter(int param)
-        {
-            return GetParam(func, (uint)param);
-        }
+    public static void FixFunctionReferences(ModuleRef module)
+    {
+        foreach (var f in functions) functions[functions.IndexOf(f)].func = GetNamedFunction(module, f.realName);
+    }
+
+    public static Function GetFromNameAndArg(string name, TypeRef[] args)
+    {
+        foreach (var f in functions)
+            if (f.name == name && (f.args.SequenceEqual(args) || f.vararg))
+                return f;
+
+        return null;
+    }
+
+    public static Function GetFromName(string name)
+    {
+        foreach (var f in functions)
+            if (f.name == name)
+                return f;
+
+        return null;
+    }
+
+    public string GetName()
+    {
+        //For some reason GetValueName wasn't working. came up with this alternative.
+        return Regex.Match(PrintValueToString(func), "(?<=@)[\\w\\.]+").Value;
+    }
+
+    public ValueRef GetParameter(int param)
+    {
+        return GetParam(func, (uint)param);
     }
 }
