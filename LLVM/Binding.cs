@@ -44,6 +44,8 @@ public static class Binding
 
     [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetBasicBlockName")]
     public static extern string GetBasicBlockName(BasicBlockRef BB);
+    [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetBasicBlockByName", ExactSpelling = true)]
+    public static extern BasicBlockRef GetBasicBlockByName(ValueRef func, string name);
 
     [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetBasicBlockParent")]
     public static extern ValueRef GetBasicBlockParent(BasicBlockRef BB);
@@ -56,6 +58,9 @@ public static class Binding
 
     [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetBasicBlocks")]
     public static extern void GetBasicBlocks(ValueRef Fn, out BasicBlockRef[] BasicBlocks);
+
+    [DllImport("LLVM-C.dll", EntryPoint = "LLVMBuildICmp")]
+    public static extern ValueRef BuildICmp(BuilderRef builder, IntPredicate op, ValueRef left, ValueRef right, string name = "");
 
     [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetFirstBasicBlock")]
     public static extern BasicBlockRef GetFirstBasicBlock(ValueRef Fn);
@@ -313,4 +318,5 @@ public static class Binding
 
     [DllImport("LLVM-C.dll", EntryPoint = "LLVMPrintValueToString", ExactSpelling = true)]
     public static extern string PrintValueToString(ValueRef va);
+
 }
