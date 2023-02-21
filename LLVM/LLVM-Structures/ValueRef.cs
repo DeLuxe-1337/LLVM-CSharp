@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿using static LLVM.Binding;
+using LLVM.LLVM_Structures;
+using System.Runtime.InteropServices;
 
 namespace LLVM;
 
@@ -16,7 +18,6 @@ public readonly struct ValueRef : IEquatable<ValueRef>
     {
         return handle == other.handle;
     }
-
     public override bool Equals(object obj)
     {
         return obj is ValueRef other && Equals(other);
@@ -31,9 +32,26 @@ public readonly struct ValueRef : IEquatable<ValueRef>
     {
         return left.handle.Equals(right.handle);
     }
-
     public static bool operator !=(ValueRef left, ValueRef right)
     {
         return !(left.handle == right.handle);
+    }
+
+    public static bool operator ==(ValueRef left, OpCode right)
+    {
+        return GetInstructionOpcode(left) == right;
+    }
+    public static bool operator !=(ValueRef left, OpCode right)
+    {
+        Console.WriteLine(GetInstructionOpcode(left));
+        return GetInstructionOpcode(left) != right;
+    }
+    public static bool operator !=(OpCode left, ValueRef right)
+    {
+        return GetInstructionOpcode(right) != left;
+    }
+    public static bool operator ==(OpCode left, ValueRef right)
+    {
+        return GetInstructionOpcode(right) == left;
     }
 }
