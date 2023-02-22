@@ -9,4 +9,19 @@ public class Call : WrapBase
     {
         return BuildCall2(builder, func.sig, func.func, args, (uint)args.Length);
     }
+    public static TypeRef[] ValueRefsToTypes(ValueRef[] args )
+    {
+        List<TypeRef> types = new();
+
+        foreach (var a in args)
+            types.Add(TypeOf(a));
+
+        return types.ToArray();
+    }
+    public static ValueRef OriginalCall(BuilderRef builder, TypeRef ret, ValueRef func, ValueRef[] args) { 
+        var types = ValueRefsToTypes(args);
+        var sig = FunctionType(ret, types, (uint)types.Length);
+
+        return BuildCall2(builder, sig, func, args, (uint)args.Length);
+    }
 }

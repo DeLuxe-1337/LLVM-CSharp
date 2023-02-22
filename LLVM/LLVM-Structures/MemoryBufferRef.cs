@@ -12,14 +12,14 @@ public readonly struct MemoryBufferRef : IEquatable<MemoryBufferRef>
         this.handle = handle;
     }
 
-    public bool Equals(BasicBlockRef other)
+    public bool Equals(MemoryBufferRef other)
     {
         return handle == other.handle;
     }
 
     public override bool Equals(object obj)
     {
-        return obj is BasicBlockRef other && Equals(other);
+        return obj is MemoryBufferRef other && Equals(other);
     }
 
     public override int GetHashCode()
@@ -27,12 +27,12 @@ public readonly struct MemoryBufferRef : IEquatable<MemoryBufferRef>
         return handle.GetHashCode();
     }
 
-    public static bool operator ==(BasicBlockRef left, BasicBlockRef right)
+    public static bool operator ==(MemoryBufferRef left, MemoryBufferRef right)
     {
         return left.handle.Equals(right.handle);
     }
 
-    public static bool operator !=(BasicBlockRef left, BasicBlockRef right)
+    public static bool operator !=(MemoryBufferRef left, MemoryBufferRef right)
     {
         return !(left.handle == right.handle);
     }

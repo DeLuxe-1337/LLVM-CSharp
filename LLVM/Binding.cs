@@ -326,6 +326,17 @@ public static class Binding
     [DllImport("LLVM-C.dll", EntryPoint = "LLVMCreateMemoryBufferWithContentsOfFile", ExactSpelling = true)]
     public static extern BoolRef CreateMemoryBufferWithContentsOfFile(string path, out MemoryBufferRef outMemBuf, out string outMessage);
     [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetBitcodeModule2", ExactSpelling = true)]
-    public static extern BoolRef GetBitcodeModule2(string path, out MemoryBufferRef outMemBuf, out string outMessage);
+    public static extern BoolRef GetBitcodeModule2(MemoryBufferRef outMemBuf, out ModuleRef module);
+
+    [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetElementType", ExactSpelling = true)]
+    public static extern TypeRef GetElementType(TypeRef val);
+
+    [DllImport("LLVM-C.dll", EntryPoint = "LLVMCountParamTypes", ExactSpelling = true)]
+    public static extern int CountParamTypes(TypeRef val);
+    [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetParamTypes", ExactSpelling = true)]
+    public static extern void GetParamTypes(TypeRef val, out TypeRef[] args);
+    [DllImport("LLVM-C.dll", EntryPoint = "LLVMPrintTypeToString", ExactSpelling = true)]
+    public static extern string PrintTypeToString(TypeRef val);
+
 
 }

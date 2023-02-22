@@ -74,4 +74,18 @@ public class Function : WrapBase
     {
         return GetParam(func, (uint)param);
     }
+    public static TypeRef CreateSignature(TypeRef[] args, TypeRef ret = default)
+    {
+        if (ret == default)
+            ret = VoidType();
+
+        return FunctionType(ret, args, (uint)args.Length);
+    }
+    public static TypeRef CreateSignature(ValueRef[] args, TypeRef ret = default)
+    {
+        if (ret == default)
+            ret = VoidType();
+
+        return FunctionType(ret, Call.ValueRefsToTypes(args), (uint)args.Length);
+    }
 }
