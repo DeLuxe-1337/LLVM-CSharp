@@ -8,7 +8,7 @@ namespace LLVM.LLVM_Structures
 {
     public enum IntPredicate
     {
-        IntEQ,
+        IntEQ = 32,
         IntNE,
         IntUGT,
         IntUGE,

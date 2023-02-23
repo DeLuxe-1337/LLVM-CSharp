@@ -46,10 +46,20 @@ public class Function : WrapBase
         foreach (var f in functions) functions[functions.IndexOf(f)].func = GetNamedFunction(module, f.realName);
     }
 
+    public static bool SequenceEqualTypes(TypeRef[] typeRef1, TypeRef[] typeRef2)
+    {
+        for (int i = 0; i < typeRef1.Length; i++)
+        {
+            if (PrintTypeToString(typeRef1[i]) != PrintTypeToString(typeRef2[i]))
+                return false;
+        }
+
+        return true;
+    }
     public static Function GetFromNameAndArg(string name, TypeRef[] args)
     {
         foreach (var f in functions)
-            if (f.name == name && (f.args.SequenceEqual(args) || f.vararg))
+            if (f.name == name && (SequenceEqualTypes(f.args, args) || f.vararg))
                 return f;
 
         return null;
