@@ -8,7 +8,7 @@ namespace LLVM.LLVM_Structures
 {
     public enum OpCode
     {
-        Ret,
+        Ret = 1,
         Br,
         Switch,
         IndirectBr,
