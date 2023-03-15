@@ -7,13 +7,19 @@ namespace LLVM;
 [StructLayout(LayoutKind.Explicit)]
 public readonly struct ValueRef : IEquatable<ValueRef>
 {
+    private static readonly nint VNULL = -999999999;
     [FieldOffset(0)] private readonly nint handle;
 
     public ValueRef(nint handle)
     {
         this.handle = handle;
     }
-
+    public static ValueRef AsNull()
+    {
+        return new ValueRef(VNULL);
+    }
+    public bool IsNull()
+        => handle == VNULL;
     public bool Equals(ValueRef other)
     {
         return handle == other.handle;

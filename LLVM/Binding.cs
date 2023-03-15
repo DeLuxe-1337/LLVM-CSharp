@@ -340,4 +340,6 @@ public static class Binding
 
     [DllImport("LLVM-C.dll", EntryPoint = "LLVMGetTypeByName", ExactSpelling = true)]
     public static extern TypeRef GetTypeByName(ModuleRef m, string name);
+    [DllImport("LLVM-C.dll", EntryPoint = "LLVMCloneModule", ExactSpelling = true)]
+    public static extern ModuleRef CloneModule(ModuleRef m);
 }
