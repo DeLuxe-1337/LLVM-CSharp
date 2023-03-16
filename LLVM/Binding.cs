@@ -342,4 +342,8 @@ public static class Binding
     public static extern TypeRef GetTypeByName(ModuleRef m, string name);
     [DllImport("LLVM-C.dll", EntryPoint = "LLVMCloneModule", ExactSpelling = true)]
     public static extern ModuleRef CloneModule(ModuleRef m);
+    [DllImport("LLVM-C.dll", EntryPoint = "LLVMInlineAsm", ExactSpelling = true)]
+    private static extern ValueRef InlineAsm(
+        TypeRef resultType, string asmString, string constraints, bool hasSideEffects,
+        bool isAlignStack, AsmDialect asmDialect, AsmIntKind asmIntKind);
 }
